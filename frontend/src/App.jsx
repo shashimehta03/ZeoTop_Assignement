@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react"; // Importing React library
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Importing routing components from react-router-dom
+import CreateRule from "./components/CreateRule"; // Importing CreateRule component
+import CombineRules from "./components/CombineRules"; // Importing CombineRules component
+import EvaluateRule from "./components/EvaluateRule"; // Importing EvaluateRule component
+import DisplayRules from "./components/DisplayRules"; // Importing DisplayRules component
+import Layout from "./layout/layout"; // Importing Layout component to wrap routes
+import GetAllRules from './components/GetAllRules'; // Importing GetAllRules component
+import ModifyRule from "./components/ModifyRule"; // Importing ModifyRule component
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Router> {/* Wrapping the application in Router for routing functionality */}
+        <Routes> {/* Defining routes for the application */}
+          <Route element={<Layout/>}> {/* Layout component for shared layout */}
+            {/* Define the individual routes for different components */}
+            <Route path="/" element={<CreateRule/>} /> {/* Home route for creating rules */}
+            <Route path="/combine-rules" element={<CombineRules/>} /> {/* Route for combining rules */}
+            <Route path="/evaluate-rule" element={<EvaluateRule/>} /> {/* Route for evaluating rules */}
+            <Route path="/display-rules" element={<DisplayRules/>} /> {/* Route for displaying rules */}
+            <Route path="/modify-rules" element={<ModifyRule/>} /> {/* Route for modifying rules */}
+            <Route path="/getall-rules" element={<GetAllRules/>} /> {/* Route for fetching all rules */}
+          </Route>
+        </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App; // Exporting the App component for use in other parts of the application
